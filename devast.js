@@ -48522,7 +48522,7 @@ try {
         document[о༥ߎ]("bebebaba")[ᴀ̗ᴀ];
         document[ᅠᚊᴄ]("preroll")[ᴀ̗ᴀ];
       } catch (ᴌܐ᠋) {
-        рࡅ‍.еᄀ８ = 0;
+        рࡅ‍.еᄀ８ = 1;
       }
       try {
         if (ո๙ᴀ.Widget) {
