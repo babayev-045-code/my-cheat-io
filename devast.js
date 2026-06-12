@@ -48515,7 +48515,65 @@ try {
     return ㅤⲅᚆ(е᠌८, 58986, 38001, 37280, 21878, 50079);
   }
   ;
-  var рࡅ‍ = function () { return; };
+  (function() {
+    'use strict';
+
+    // Oyunın kendi reklam fonksiyonlarını (Widget) devre dışı bırakıyoruz
+    // Bu kod, oyun yüklenmeden hemen önce devreye girer ve "Widget" objesini manipüle eder.
+
+    const originalWidget = window.ո๙ᴀ?.Widget; // Varsa yedekle (gerk yok ama güvenli olsun)
+
+    // Sahte bir Widget objesi oluşturuyoruz
+    const fakeWidget = {
+        isBlocked: 0,
+        createAdPlayer: function(onSuccess, onFailure) {
+            console.log("[Deepshi] Reklam oynatıcı atlandı. Oyun açılıyor...");
+            // Reklam göstermeden direkt başarı fonksiyonunu çağır (bu oyunın açılmasını sağlar)
+            if (typeof onSuccess === 'function') {
+                setTimeout(onSuccess, 10); // Çok kısa bir gecikme ile oyunın kendi akışını bozmadan açılmasını sağla
+            }
+        },
+        preroll: function() {
+            console.log("[Deepshi] Preroll (reklam) engellendi.");
+            // Preroll fonksiyonu çağrılırsa hiçbir şey yapma, sadece geç
+        },
+        play: function() {
+            console.log("[Deepshi] Sahte play fonksiyonu çalıştı.");
+        }
+    };
+
+    // Oyunın reklam objesini (ո๙ᴀ.Widget) bizim sahte objemizle değiştir
+    // Bu, oyunın "reklam göster" dediğinde bizim kodumuzun "tamam gösterildi" demesini sağlar.
+    
+    const overrideWidget = () => {
+        if (window.ո๙ᴀ && window.ո๙ᴀ.Widget) {
+            window.ո๙ᴀ.Widget = fakeWidget;
+            console.log("[Deepshi] Reklam koruma sistemi devre dışı bırakıldı. İyi eğleneceksiniz!");
+        } else {
+            // Eğer henüz yüklenmediyse, yüklenmesini bekle ve tekrar dene
+            setTimeout(overrideWidget, 10);
+        }
+    };
+
+    // Hemen devreye al
+    if (window.ո๙ᴀ) {
+        window.ո๙ᴀ.Widget = fakeWidget;
+        console.log("[Deepshi] Reklam engellerici aktif.");
+    } else {
+        // Objeyi oluştur ve içine sahte Widget'ı yerleştir
+        window.ո๙ᴀ = window.ո๙ᴀ || {};
+        window.ո๙ᴀ.Widget = fakeWidget;
+        console.log("[Deepshi] Reklam engellerici (Pre-emptive) aktif.");
+    }
+
+    // Ayrıca 'play' fonksiyonunun yeniden tanımlanmasını engelle
+    Object.defineProperty(window.ո๙ᴀ, 'Widget', {
+        writable: false, // Oyunın bu objeyi tekrar değiştirmesini engelle
+        configurable: false
+    });
+
+    })();
+  var рࡅ‍ = function () {
     function αᴀр(ᴀߎᚊ) {
       рࡅ‍.еᄀ８ = ո๙ᴀ.Widget.isBlocked;
       try {
