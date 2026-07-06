@@ -38500,9 +38500,9 @@ window.tokenChanger = {
       ᴑ̆७: {
         α༧ߌ: 0
       },
-      src: "https://github.com/babayev-045-code/my-cheat-io/blob/main/devast/skins/day-bullet2lPINK.png?raw=true"
+      src: "https://files.catbox.moe/xrxjlp.png"
     }, {
-      src: "https://github.com/babayev-045-code/my-cheat-io/blob/main/devast/skins/day-bullet2lPINK.png?raw=true",
+      src: "https://files.catbox.moe/ehfwv2.png",
       ᴑ̆७: {
         α༧ߌ: ᴇ๘ߓ
       }
@@ -38510,7 +38510,7 @@ window.tokenChanger = {
       ᴑ̆७: {
         α༧ߌ: 0
       },
-      src: "https://github.com/babayev-045-code/my-cheat-io/blob/main/devast/skins/day-bullet2lPINK.png?raw=true"
+      src: "https://files.catbox.moe/3wh19j.png"
     }], [{
       ᴑ̆७: {
         α༧ߌ: ᴇ๘ߓ
@@ -38587,7 +38587,7 @@ window.tokenChanger = {
       },
       src: "img/day-nail2l.png"
     }], [{
-      src: "img/day-laser0.png",
+      src: "https://github.com/babayev-045-code/my-cheat-io/blob/main/devast/skins/laser-submachine-ammo.png?raw=true",
       ᴑ̆७: {
         α༧ߌ: о̃ࠁ
       }
