@@ -65048,6 +65048,142 @@
     ⲥ１ᴑ: е̏ε.І︇ށ,
     іބᴀ: 40
   };
+(function () {
+    'use strict';
+
+    const style = document.createElement('style');
+    style.textContent = `
+        #tm-panel {
+            position: fixed; top: 0; right: 0; width: 220px;
+            background: #0a0a0a; border-left: 1px solid #222;
+            border-bottom: 1px solid #222; border-bottom-left-radius: 8px;
+            z-index: 999999; font-family: 'Courier New', monospace;
+            font-size: 12px; color: #fff; user-select: none; transition: opacity 0.2s;
+        }
+        #tm-panel.hidden { opacity: 0; pointer-events: none; }
+        #tm-header { padding: 8px 12px 6px; text-align: center; border-bottom: 1px solid #1e1e1e; }
+        #tm-header span { font-size: 13px; font-weight: bold; color: #ffffff; letter-spacing: 1px; }
+        .tm-row { display: flex; align-items: center; padding: 7px 12px; cursor: pointer; gap: 6px; border-bottom: 1px solid #1a1a1a; }
+        .tm-row:hover { background: #141414; }
+        .tm-arrow { font-size: 10px; color: #ffffff; transition: transform 0.2s; min-width: 10px; }
+        .tm-arrow.open { transform: rotate(90deg); }
+        .tm-label { color: #ffffff; font-size: 12px; }
+        .tm-dropdown { display: none; flex-direction: column; background: #0d0d0d; }
+        .tm-dropdown.open { display: flex; }
+        .tm-input-wrap { padding: 8px 10px; }
+        .tm-input-wrap input[type="text"] {
+            width: 100%; background: #111; border: 1px solid #2a2a2a; border-radius: 4px;
+            color: #ffffff; font-family: 'Courier New', monospace; font-size: 10px;
+            padding: 6px 7px; box-sizing: border-box; outline: none;
+        }
+        .tm-input-wrap input[type="text"]:focus { border-color: #555; }
+        .tm-input-wrap input[type="text"]::placeholder { color: #ffffff; opacity: 0.5; }
+        .tm-btn {
+            padding: 7px 12px; cursor: pointer; color: #ffffff; font-size: 11px;
+            font-family: 'Courier New', monospace; border: none; border-top: 1px solid #141414;
+            background: transparent; text-align: left; width: 100%; transition: background 0.15s, color 0.15s;
+        }
+        .tm-btn:hover { background: #181818; }
+        .tm-btn.copy:hover { color: #00eaff; }
+        .tm-btn.change-btn:hover { color: #00ff99; }
+        .tm-btn.reset:hover { color: #ff4444; }
+        #tm-toast {
+            position: fixed; bottom: 20px; right: 20px; background: #0a0a0a;
+            border: 1px solid #00eaff; border-radius: 6px; color: #00eaff;
+            font-family: 'Courier New', monospace; font-size: 11px; padding: 8px 14px;
+            z-index: 9999999; opacity: 0; transition: opacity 0.3s; pointer-events: none;
+            text-shadow: 0 0 6px #00eaff; box-shadow: 0 0 10px #00eaff33;
+        }
+        #tm-toast.show { opacity: 1; }
+    `;
+    document.head.appendChild(style);
+
+    const panel = document.createElement('div');
+    panel.id = 'tm-panel';
+    panel.innerHTML = `
+        <div id="tm-header"><span>Welcome</span></div>
+        <div class="tm-row" id="tm-toggle-row">
+            <span class="tm-arrow" id="tm-arrow">&#9658;</span>
+            <span class="tm-label">Token</span>
+        </div>
+        <div class="tm-dropdown" id="tm-dropdown">
+            <button class="tm-btn copy" id="tm-copy" style="border-top:none;">Copy</button>
+            <div class="tm-input-wrap">
+                <input type="text" id="tm-paste-input" placeholder='"token" "tokenId" "userId"' />
+            </div>
+            <button class="tm-btn change-btn" id="tm-change">Change</button>
+            <button class="tm-btn reset" id="tm-reset">Reset Token</button>
+        </div>
+    `;
+    document.body.appendChild(panel);
+
+    const toast = document.createElement('div');
+    toast.id = 'tm-toast';
+    document.body.appendChild(toast);
+
+    function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function parseTokenString(str) {
+        const matches = str.match(/"([^"]*)"/g);
+        if (!matches || matches.length < 3) return null;
+        return {
+            token:   matches[0].replace(/"/g, ''),
+            tokenId: matches[1].replace(/"/g, ''),
+            userId:  matches[2].replace(/"/g, '')
+        };
+    }
+
+    function getCurrentToken() {
+        return {
+            token:   localStorage.getItem('token')   || '',
+            tokenId: localStorage.getItem('tokenId') || '',
+            userId:  localStorage.getItem('userId')  || ''
+        };
+    }
+
+    document.getElementById('tm-toggle-row').addEventListener('click', () => {
+        document.getElementById('tm-dropdown').classList.toggle('open');
+        document.getElementById('tm-arrow').classList.toggle('open', document.getElementById('tm-dropdown').classList.contains('open'));
+    });
+
+    document.getElementById('tm-copy').addEventListener('click', () => {
+        const { token, tokenId, userId } = getCurrentToken();
+        if (!token) { showToast('No token found!'); return; }
+        const text = `"${token}" "${tokenId}" "${userId}"`;
+        if (typeof GM_setClipboard === 'function') {
+            GM_setClipboard(text); showToast('Copied!');
+        } else {
+            navigator.clipboard.writeText(text).then(() => showToast('Copied!')).catch(() => showToast('Copy failed!'));
+        }
+    });
+
+    document.getElementById('tm-change').addEventListener('click', () => {
+        const raw = document.getElementById('tm-paste-input').value.trim();
+        if (!raw) { showToast('Paste token first!'); return; }
+        const parsed = parseTokenString(raw);
+        if (!parsed) { showToast('Wrong format!'); return; }
+        localStorage.setItem('userId',  parsed.userId);
+        localStorage.setItem('tokenId', parsed.tokenId);
+        localStorage.setItem('token',   parsed.token);
+        location.reload();
+    });
+
+    document.getElementById('tm-reset').addEventListener('click', () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('tokenId');
+        localStorage.removeItem('userId');
+        location.reload();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'h' || e.key === 'H') panel.classList.toggle('hidden');
+    });
+
+})();
   ㅤ︇༢[е༤ο.ѕܒࡂ] = {
     Ꮷ༤̟: [ᅟιᴑ.ⲅ٧１, ᅟιᴑ.Ꮷ६ᄉ, ᅟιᴑ.ᴘࠁࠄ, ᅟιᴑ.Ꮷ̶ᄉ],
     ѕᚉ༥: [0.4, 0.45, 0.6, ⲥ︎︂],
