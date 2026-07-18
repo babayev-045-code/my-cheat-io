@@ -37815,7 +37815,7 @@
             І᠋๒.αࡇ̎ += "<option disabled>All servers - " + ιࠄ٦ + " players</option></select>";
             document[ɑ๑ࡅ]("serverList")[ρ２̡] = ⲅ７२;
             document[ⲥބ༨]("servers")[ᴎ३ܖ] = 0;
-                  ᚈ͠.ԁ४ܘ.ոᄉ̀ = оߑᚊ;
+                ᅠᚈ͠.ԁ४ܘ.ոᄉ̀ = оߑᚊ;
             if (ᴏܘ๖.ﾠԁ๐("admin") !== null || ᴏܘ๖.ﾠԁ๐("member") !== null || ᴏܘ๖.ﾠԁ๐("moderator") !== null) {
               if (ᴏܘ๖.ﾠԁ๐("admin") !== null || ᴏܘ๖.ﾠԁ๐("moderator") !== null) {
                 ᅠᚈ͠.ԁ४ܘ.ոᄉ̀ = оߑᚊ;
