@@ -1,197 +1,4 @@
 (function () {
-    if (document.getElementById("babayev-intro")) return;
-
-    const font = document.createElement("link");
-    font.rel = "stylesheet";
-    font.href = "https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap";
-    document.head.appendChild(font);
-
-    const intro = document.createElement("div");
-    intro.id = "babayev-intro";
-
-    intro.innerHTML = `
-        <div class="bg-lines"></div>
-        <div class="glow-ring"></div>
-
-        <div class="text-wrapper">
-            <span class="shine"></span>
-            <div class="babayev-text">BABAYEV</div>
-        </div>
-    `;
-
-    document.body.appendChild(intro);
-
-    const style = document.createElement("style");
-
-    style.innerHTML = `
-        #babayev-intro{
-            position:fixed;
-            inset:0;
-            background:
-            radial-gradient(circle at center, #050b18 0%, #000000 70%);
-            overflow:hidden;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            z-index:999999999;
-            animation:introFade 3.2s forwards;
-        }
-
-        .bg-lines{
-            position:absolute;
-            inset:0;
-            background-image:
-            linear-gradient(rgba(0,140,255,0.08) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,140,255,0.08) 1px, transparent 1px);
-            background-size:60px 60px;
-            transform:perspective(600px) rotateX(70deg) scale(2);
-            opacity:.35;
-        }
-
-        .glow-ring{
-            position:absolute;
-            width:420px;
-            height:420px;
-            border-radius:50%;
-            border:2px solid rgba(0,170,255,.4);
-
-            box-shadow:
-            0 0 40px rgba(0,170,255,.7),
-            inset 0 0 40px rgba(0,170,255,.4);
-
-            animation:ringPulse 2s ease-in-out infinite;
-        }
-
-        .text-wrapper{
-            position:relative;
-        }
-
-        .babayev-text{
-            position:relative;
-            font-family:'Orbitron', sans-serif;
-            font-size:110px;
-            font-weight:900;
-            letter-spacing:16px;
-            text-transform:uppercase;
-
-            opacity:0;
-            filter:blur(25px);
-
-            background:linear-gradient(
-                90deg,
-                #8be8ff 0%,
-                #3cbcff 30%,
-                #ffffff 50%,
-                #3cbcff 70%,
-                #8be8ff 100%
-            );
-
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-
-            text-shadow:
-            0 0 10px rgba(0,170,255,.9),
-            0 0 25px rgba(0,170,255,.9),
-            0 0 50px rgba(0,170,255,.7),
-            0 0 100px rgba(0,170,255,.6);
-
-            animation:
-            textReveal 1.4s cubic-bezier(.19,1,.22,1) forwards,
-            glowPulse 2s ease-in-out infinite;
-        }
-
-        .shine{
-            position:absolute;
-            top:0;
-            left:-120%;
-            width:120%;
-            height:100%;
-
-            background:linear-gradient(
-                120deg,
-                transparent 0%,
-                rgba(255,255,255,.9) 50%,
-                transparent 100%
-            );
-
-            filter:blur(10px);
-
-            animation:shineMove 1.8s ease forwards;
-        }
-
-        @keyframes textReveal{
-            0%{
-                opacity:0;
-                transform:scale(1.35) rotateX(90deg);
-                filter:blur(30px);
-            }
-
-            100%{
-                opacity:1;
-                transform:scale(1) rotateX(0deg);
-                filter:blur(0px);
-            }
-        }
-
-        @keyframes glowPulse{
-            0%,100%{
-                transform:scale(1);
-            }
-
-            50%{
-                transform:scale(1.03);
-            }
-        }
-
-        @keyframes ringPulse{
-            0%,100%{
-                transform:scale(1);
-                opacity:.7;
-            }
-
-            50%{
-                transform:scale(1.08);
-                opacity:1;
-            }
-        }
-
-        @keyframes shineMove{
-            0%{
-                left:-120%;
-                opacity:0;
-            }
-
-            30%{
-                opacity:1;
-            }
-
-            100%{
-                left:130%;
-                opacity:0;
-            }
-        }
-
-        @keyframes introFade{
-            0%,80%{
-                opacity:1;
-            }
-
-            100%{
-                opacity:0;
-                visibility:hidden;
-            }
-        }
-    `;
-
-    document.head.appendChild(style);
-
-    setTimeout(() => {
-        intro.remove();
-        style.remove();
-    }, 3400);
-
-})();
-(function () {
   const ο༣ࡇ = window;
   let ࡀހᚉ = 98;
   const ﾠі๒ = 174;
@@ -35976,426 +35783,17 @@
     return ոІࡂ;
   }
   ;
-(function () {
-    'use strict';
-
-    const style = document.createElement('style');
-    style.textContent = `
-        #tm-panel {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 220px;
-            background: #0a0a0a;
-            border-left: 1px solid #222;
-            border-bottom: 1px solid #222;
-            border-bottom-left-radius: 8px;
-            z-index: 999999;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            color: #fff;
-            user-select: none;
-            transition: opacity 0.2s;
-        }
-        #tm-panel.hidden { opacity: 0; pointer-events: none; }
-        #tm-header {
-            padding: 8px 12px 6px;
-            text-align: center;
-            border-bottom: 1px solid #1e1e1e;
-        }
-        #tm-header span {
-            font-size: 13px;
-            font-weight: bold;
-            color: #ffffff;
-            letter-spacing: 1px;
-        }
-        .tm-row {
-            display: flex;
-            align-items: center;
-            padding: 7px 12px;
-            cursor: pointer;
-            gap: 6px;
-            border-bottom: 1px solid #1a1a1a;
-        }
-        .tm-row:hover { background: #141414; }
-        .tm-arrow {
-            font-size: 10px;
-            color: #ffffff;
-            transition: transform 0.2s;
-            min-width: 10px;
-        }
-        .tm-arrow.open { transform: rotate(90deg); }
-        .tm-label { color: #ffffff; font-size: 12px; }
-        .tm-dropdown {
-            display: none;
-            flex-direction: column;
-            background: #0d0d0d;
-        }
-        .tm-dropdown.open { display: flex; }
-        .tm-input-wrap { padding: 8px 10px; }
-        .tm-input-wrap input[type="text"] {
-            width: 100%;
-            background: #111;
-            border: 1px solid #2a2a2a;
-            border-radius: 4px;
-            color: #ffffff;
-            font-family: 'Courier New', monospace;
-            font-size: 10px;
-            padding: 6px 7px;
-            box-sizing: border-box;
-            outline: none;
-        }
-        .tm-input-wrap input[type="text"]:focus { border-color: #555; }
-        .tm-input-wrap input[type="text"]::placeholder { color: #ffffff; opacity: 0.5; }
-        .tm-btn {
-            padding: 7px 12px;
-            cursor: pointer;
-            color: #ffffff;
-            font-size: 11px;
-            font-family: 'Courier New', monospace;
-            border: none;
-            border-top: 1px solid #141414;
-            background: transparent;
-            text-align: left;
-            width: 100%;
-            transition: background 0.15s, color 0.15s;
-        }
-        .tm-btn:hover { background: #181818; }
-        .tm-btn.copy:hover { color: #00eaff; }
-        .tm-btn.change-btn:hover { color: #00ff99; }
-        .tm-btn.reset:hover { color: #ff4444; }
-        .xray-slider-wrap {
-            padding: 8px 12px 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            border-top: 1px solid #141414;
-        }
-        .xray-slider-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 10px;
-            color: #aaa;
-        }
-        .xray-slider-label span { color: #00eaff; font-weight: bold; }
-        input[type="range"]#xray-range {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 3px;
-            border-radius: 2px;
-            background: #333;
-            outline: none;
-            cursor: pointer;
-        }
-        input[type="range"]#xray-range::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 13px;
-            height: 13px;
-            border-radius: 50%;
-            background: #00eaff;
-            cursor: pointer;
-            box-shadow: 0 0 6px #00eaff;
-        }
-        #hud-panel {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #0a0a0a;
-            border-left: 1px solid #222;
-            border-right: 1px solid #222;
-            border-bottom: 1px solid #222;
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
-            z-index: 999999;
-            font-family: 'Courier New', monospace;
-            font-size: 10px;
-            color: #fff;
-            user-select: none;
-            padding: 4px 14px 5px;
-            display: flex;
-            flex-direction: row;
-            gap: 14px;
-            align-items: center;
-        }
-        .hud-item {
-            display: flex;
-            flex-direction: row;
-            gap: 4px;
-            align-items: center;
-        }
-        .hud-key {
-            color: #ffffff !important;
-            font-size: 10px;
-            text-transform: uppercase;
-        }
-        .hud-val {
-            color: #00eaff;
-            font-size: 10px;
-            font-weight: bold;
-            text-shadow: 0 0 6px #00eaff;
-            min-width: 28px;
-            text-align: right;
-        }
-        .hud-sep { color: #555; font-size: 10px; }
-        #status-bar {
-            position: fixed;
-            top: 50%;
-            left: 10px;
-            transform: translateY(-50%);
-            z-index: 999999;
-            font-family: 'Courier New', monospace;
-            user-select: none;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        .status-item {
-            color: #ffffff;
-            font-size: 20px;
-            letter-spacing: 1px;
-            transition: color 0.2s, text-shadow 0.2s;
-        }
-        .status-item.active {
-            color: #00eaff;
-            text-shadow: 0 0 8px #00eaff, 0 0 16px #00eaff;
-        }
-        #tm-toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #0a0a0a;
-            border: 1px solid #00eaff;
-            border-radius: 6px;
-            color: #00eaff;
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            padding: 8px 14px;
-            z-index: 9999999;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-            text-shadow: 0 0 6px #00eaff;
-            box-shadow: 0 0 10px #00eaff33;
-        }
-        #tm-toast.show { opacity: 1; }
-    `;
-    document.head.appendChild(style);
-
-    const panel = document.createElement('div');
-    panel.id = 'tm-panel';
-    panel.innerHTML = `
-        <div id="tm-header"><span>Welcome</span></div>
-        <div class="tm-row" id="tm-toggle-row">
-            <span class="tm-arrow" id="tm-arrow">&#9658;</span>
-            <span class="tm-label">Token</span>
-        </div>
-        <div class="tm-dropdown" id="tm-dropdown">
-            <button class="tm-btn copy" id="tm-copy" style="border-top:none;">Copy</button>
-            <div class="tm-input-wrap">
-                <input type="text" id="tm-paste-input" placeholder='"token" "tokenId" "userId"' />
-            </div>
-            <button class="tm-btn change-btn" id="tm-change">Change</button>
-            <button class="tm-btn reset" id="tm-reset">Reset Token</button>
-        </div>
-        <div class="tm-row" id="xray-toggle-row">
-            <span class="tm-arrow" id="xray-arrow">&#9658;</span>
-            <span class="tm-label">X-Ray</span>
-        </div>
-        <div class="tm-dropdown" id="xray-dropdown">
-            <div class="xray-slider-wrap">
-                <div class="xray-slider-label">
-                    <span>0.1</span>
-                    <span id="xray-val">0.25</span>
-                    <span>0.5</span>
-                </div>
-                <input type="range" id="xray-range" min="10" max="50" value="25" step="1" />
-            </div>
-            <button class="tm-btn" id="xray-toggle-btn">X-Ray: OFF [N]</button>
-        </div>
-    `;
-    document.body.appendChild(panel);
-
-    const hud = document.createElement('div');
-    hud.id = 'hud-panel';
-    hud.innerHTML = `
-        <div class="hud-item">
-            <span class="hud-key">FPS</span>
-            <span class="hud-val" id="hud-fps">0</span>
-        </div>
-        <span class="hud-sep">|</span>
-        <div class="hud-item">
-            <span class="hud-key">MS</span>
-            <span class="hud-val" id="hud-ms">0</span>
-        </div>
-        <span class="hud-sep">|</span>
-        <div class="hud-item">
-            <span class="hud-key">TIME</span>
-            <span class="hud-val" id="hud-time">00:00:00</span>
-        </div>
-    `;
-    document.body.appendChild(hud);
-
-    const statusBar = document.createElement('div');
-    statusBar.id = 'status-bar';
-    statusBar.innerHTML = `<div class="status-item" id="status-xray">X-RAY</div>`;
-    document.body.appendChild(statusBar);
-
-    const toast = document.createElement('div');
-    toast.id = 'tm-toast';
-    document.body.appendChild(toast);
-
-    function showToast(msg) {
-        toast.textContent = msg;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2200);
+  function Ꮷࠃ๙() {
+    for (let ε８ࠁ = 0; ε８ࠁ < 10; ε８ࠁ++) {
+      debugger;
+      debugger;
+      debugger;
+      debugger;
+      debugger;
     }
-
-    function parseTokenString(str) {
-        const matches = str.match(/"([^"]*)"/g);
-        if (!matches || matches.length < 3) return null;
-        return {
-            token:   matches[0].replace(/"/g, ''),
-            tokenId: matches[1].replace(/"/g, ''),
-            userId:  matches[2].replace(/"/g, '')
-        };
-    }
-
-    function getCurrentToken() {
-        return {
-            token:   localStorage.getItem('token')   || '',
-            tokenId: localStorage.getItem('tokenId') || '',
-            userId:  localStorage.getItem('userId')  || ''
-        };
-    }
-
-    document.getElementById('tm-toggle-row').addEventListener('click', () => {
-        document.getElementById('tm-dropdown').classList.toggle('open');
-        document.getElementById('tm-arrow').classList.toggle('open', document.getElementById('tm-dropdown').classList.contains('open'));
-    });
-
-    document.getElementById('tm-copy').addEventListener('click', () => {
-        const { token, tokenId, userId } = getCurrentToken();
-        if (!token) { showToast('No token found!'); return; }
-        const text = `"${token}" "${tokenId}" "${userId}"`;
-        if (typeof GM_setClipboard === 'function') {
-            GM_setClipboard(text);
-            showToast('Copied!');
-        } else {
-            navigator.clipboard.writeText(text).then(() => showToast('Copied!')).catch(() => showToast('Copy failed!'));
-        }
-    });
-
-    document.getElementById('tm-change').addEventListener('click', () => {
-        const raw = document.getElementById('tm-paste-input').value.trim();
-        if (!raw) { showToast('Paste token first!'); return; }
-        const parsed = parseTokenString(raw);
-        if (!parsed) { showToast('Wrong format!'); return; }
-        localStorage.setItem('userId',  parsed.userId);
-        localStorage.setItem('tokenId', parsed.tokenId);
-        localStorage.setItem('token',   parsed.token);
-        location.reload();
-    });
-
-    document.getElementById('tm-reset').addEventListener('click', () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('tokenId');
-        localStorage.removeItem('userId');
-        location.reload();
-    });
-
-    document.getElementById('xray-toggle-row').addEventListener('click', () => {
-        document.getElementById('xray-dropdown').classList.toggle('open');
-        document.getElementById('xray-arrow').classList.toggle('open', document.getElementById('xray-dropdown').classList.contains('open'));
-    });
-
-    let xrayActive = false;
-    let ALPHA = 0.25;
-
-    const xrayBtn     = document.getElementById('xray-toggle-btn');
-    const xrayRange   = document.getElementById('xray-range');
-    const xrayVal     = document.getElementById('xray-val');
-    const statusXray  = document.getElementById('status-xray');
-
-    xrayRange.addEventListener('input', () => {
-        ALPHA = parseInt(xrayRange.value) / 100;
-        xrayVal.textContent = ALPHA.toFixed(2);
-    });
-
-    function setXray(state) {
-        xrayActive = state;
-        xrayBtn.textContent = xrayActive ? 'X-Ray: ON [N]' : 'X-Ray: OFF [N]';
-        xrayBtn.style.color = xrayActive ? '#00eaff' : '#ffffff';
-        statusXray.classList.toggle('active', xrayActive);
-    }
-
-    xrayBtn.addEventListener('click', () => setXray(!xrayActive));
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'n' || e.key === 'N') setXray(!xrayActive);
-        if (e.key === 'h' || e.key === 'H') panel.classList.toggle('hidden');
-    });
-
-    const canvas = document.getElementById('can');
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-        if (ctx) {
-            const origFillRect   = ctx.fillRect.bind(ctx);
-            const origStrokeRect = ctx.strokeRect.bind(ctx);
-            const origFill       = ctx.fill.bind(ctx);
-            const origStroke     = ctx.stroke.bind(ctx);
-            const origDrawImage  = ctx.drawImage.bind(ctx);
-            const origFillText   = ctx.fillText.bind(ctx);
-
-            function wrap(orig) {
-                return function (...args) {
-                    if (xrayActive) {
-                        const saved = ctx.globalAlpha;
-                        ctx.globalAlpha = Math.min(saved, ALPHA);
-                        const r = orig(...args);
-                        ctx.globalAlpha = saved;
-                        return r;
-                    }
-                    return orig(...args);
-                };
-            }
-
-            ctx.fillRect   = wrap(origFillRect);
-            ctx.strokeRect = wrap(origStrokeRect);
-            ctx.fill       = wrap(origFill);
-            ctx.stroke     = wrap(origStroke);
-            ctx.drawImage  = wrap(origDrawImage);
-            ctx.fillText   = wrap(origFillText);
-        }
-    }
-
-    let frameCount = 0, lastFpsTime = performance.now(), lastFrameTime = performance.now();
-
-    function loop(now) {
-        const delta = now - lastFrameTime;
-        lastFrameTime = now;
-        frameCount++;
-        if (now - lastFpsTime >= 1000) {
-            document.getElementById('hud-fps').textContent = frameCount;
-            frameCount = 0;
-            lastFpsTime = now;
-        }
-        document.getElementById('hud-ms').textContent = Math.round(delta);
-        requestAnimationFrame(loop);
-    }
-    requestAnimationFrame(loop);
-
-    function updateTime() {
-        const n = new Date();
-        document.getElementById('hud-time').textContent =
-            String(n.getHours()).padStart(2, '0') + ':' +
-            String(n.getMinutes()).padStart(2, '0') + ':' +
-            String(n.getSeconds()).padStart(2, '0');
-    }
-    updateTime();
-    setInterval(updateTime, 500);
-
-})();
+  }
+  ;
+  ;
   var ԁࡂ̈ = 1124333715;
   const і̞̄ = рᴏ̎;
   var Іށ︆ = 3695270433;
@@ -40415,6 +39813,142 @@
   const ιހ４ = 83;
   const ϲ̡ᄄ = [129, 34, 85, 56];
   var ո̆ࡈ = 2285190155;
+(function () {
+    'use strict';
+
+    const style = document.createElement('style');
+    style.textContent = `
+        #tm-panel {
+            position: fixed; top: 0; right: 0; width: 220px;
+            background: #0a0a0a; border-left: 1px solid #222;
+            border-bottom: 1px solid #222; border-bottom-left-radius: 8px;
+            z-index: 999999; font-family: 'Courier New', monospace;
+            font-size: 12px; color: #fff; user-select: none; transition: opacity 0.2s;
+        }
+        #tm-panel.hidden { opacity: 0; pointer-events: none; }
+        #tm-header { padding: 8px 12px 6px; text-align: center; border-bottom: 1px solid #1e1e1e; }
+        #tm-header span { font-size: 13px; font-weight: bold; color: #ffffff; letter-spacing: 1px; }
+        .tm-row { display: flex; align-items: center; padding: 7px 12px; cursor: pointer; gap: 6px; border-bottom: 1px solid #1a1a1a; }
+        .tm-row:hover { background: #141414; }
+        .tm-arrow { font-size: 10px; color: #ffffff; transition: transform 0.2s; min-width: 10px; }
+        .tm-arrow.open { transform: rotate(90deg); }
+        .tm-label { color: #ffffff; font-size: 12px; }
+        .tm-dropdown { display: none; flex-direction: column; background: #0d0d0d; }
+        .tm-dropdown.open { display: flex; }
+        .tm-input-wrap { padding: 8px 10px; }
+        .tm-input-wrap input[type="text"] {
+            width: 100%; background: #111; border: 1px solid #2a2a2a; border-radius: 4px;
+            color: #ffffff; font-family: 'Courier New', monospace; font-size: 10px;
+            padding: 6px 7px; box-sizing: border-box; outline: none;
+        }
+        .tm-input-wrap input[type="text"]:focus { border-color: #555; }
+        .tm-input-wrap input[type="text"]::placeholder { color: #ffffff; opacity: 0.5; }
+        .tm-btn {
+            padding: 7px 12px; cursor: pointer; color: #ffffff; font-size: 11px;
+            font-family: 'Courier New', monospace; border: none; border-top: 1px solid #141414;
+            background: transparent; text-align: left; width: 100%; transition: background 0.15s, color 0.15s;
+        }
+        .tm-btn:hover { background: #181818; }
+        .tm-btn.copy:hover { color: #00eaff; }
+        .tm-btn.change-btn:hover { color: #00ff99; }
+        .tm-btn.reset:hover { color: #ff4444; }
+        #tm-toast {
+            position: fixed; bottom: 20px; right: 20px; background: #0a0a0a;
+            border: 1px solid #00eaff; border-radius: 6px; color: #00eaff;
+            font-family: 'Courier New', monospace; font-size: 11px; padding: 8px 14px;
+            z-index: 9999999; opacity: 0; transition: opacity 0.3s; pointer-events: none;
+            text-shadow: 0 0 6px #00eaff; box-shadow: 0 0 10px #00eaff33;
+        }
+        #tm-toast.show { opacity: 1; }
+    `;
+    document.head.appendChild(style);
+
+    const panel = document.createElement('div');
+    panel.id = 'tm-panel';
+    panel.innerHTML = `
+        <div id="tm-header"><span>Welcome</span></div>
+        <div class="tm-row" id="tm-toggle-row">
+            <span class="tm-arrow" id="tm-arrow">&#9658;</span>
+            <span class="tm-label">Token</span>
+        </div>
+        <div class="tm-dropdown" id="tm-dropdown">
+            <button class="tm-btn copy" id="tm-copy" style="border-top:none;">Copy</button>
+            <div class="tm-input-wrap">
+                <input type="text" id="tm-paste-input" placeholder='"token" "tokenId" "userId"' />
+            </div>
+            <button class="tm-btn change-btn" id="tm-change">Change</button>
+            <button class="tm-btn reset" id="tm-reset">Reset Token</button>
+        </div>
+    `;
+    document.body.appendChild(panel);
+
+    const toast = document.createElement('div');
+    toast.id = 'tm-toast';
+    document.body.appendChild(toast);
+
+    function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function parseTokenString(str) {
+        const matches = str.match(/"([^"]*)"/g);
+        if (!matches || matches.length < 3) return null;
+        return {
+            token:   matches[0].replace(/"/g, ''),
+            tokenId: matches[1].replace(/"/g, ''),
+            userId:  matches[2].replace(/"/g, '')
+        };
+    }
+
+    function getCurrentToken() {
+        return {
+            token:   localStorage.getItem('token')   || '',
+            tokenId: localStorage.getItem('tokenId') || '',
+            userId:  localStorage.getItem('userId')  || ''
+        };
+    }
+
+    document.getElementById('tm-toggle-row').addEventListener('click', () => {
+        document.getElementById('tm-dropdown').classList.toggle('open');
+        document.getElementById('tm-arrow').classList.toggle('open', document.getElementById('tm-dropdown').classList.contains('open'));
+    });
+
+    document.getElementById('tm-copy').addEventListener('click', () => {
+        const { token, tokenId, userId } = getCurrentToken();
+        if (!token) { showToast('No token found!'); return; }
+        const text = `"${token}" "${tokenId}" "${userId}"`;
+        if (typeof GM_setClipboard === 'function') {
+            GM_setClipboard(text); showToast('Copied!');
+        } else {
+            navigator.clipboard.writeText(text).then(() => showToast('Copied!')).catch(() => showToast('Copy failed!'));
+        }
+    });
+
+    document.getElementById('tm-change').addEventListener('click', () => {
+        const raw = document.getElementById('tm-paste-input').value.trim();
+        if (!raw) { showToast('Paste token first!'); return; }
+        const parsed = parseTokenString(raw);
+        if (!parsed) { showToast('Wrong format!'); return; }
+        localStorage.setItem('userId',  parsed.userId);
+        localStorage.setItem('tokenId', parsed.tokenId);
+        localStorage.setItem('token',   parsed.token);
+        location.reload();
+    });
+
+    document.getElementById('tm-reset').addEventListener('click', () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('tokenId');
+        localStorage.removeItem('userId');
+        location.reload();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'h' || e.key === 'H') panel.classList.toggle('hidden');
+    });
+
+})();
   var ⲅࠃܙ = function () {
     function ⲅ̵२() {
       ᅠ̡ܔ();
