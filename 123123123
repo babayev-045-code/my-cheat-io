@@ -3207,7 +3207,7 @@
     function ᴄ̶α(ᴎࡃ̙) {
       ᴘ̞༠[Ꮷࠄܙ](ᴄ̶α);
       if (іа︍ !== ᴎࡃ̙) {
-        ⲥᴄ༦ = (ᴎࡃ̙ - і६ᚆ) * 1.2;
+        ⲥᴄ༦ = ᴎࡃ̙ - і६ᚆ;
         і६ᚆ = ᴎࡃ̙;
       }
       ᴌᏧ̶();
@@ -24470,59 +24470,121 @@
   }();
 
 (function() {
+    var teleportEnabled = false;
     var _tpClientX = 0;
     var _tpClientY = 0;
 
     function _tpGetWorldCoords(clientX, clientY) {
         var canvas = document.getElementById("can");
         var rect = canvas ? canvas.getBoundingClientRect() : { left: 0, top: 0 };
-
         var zoomVal = 0;
         try { zoomVal = ᅠߒᄂ[еࠀ͢] || 0; } catch(e) {}
-
-        // zoom 0 olduqda normal, + olduqda yaxın, - olduqda uzaq
-        // о७ᄄ əsas tile ölçüsüdür
-        var scaleby = о७ᄄ * Math.pow(2, ᅠߒᄂ[еࠀ͢]);
-
+        var scaleby = о७ᄄ * Math.pow(2, zoomVal);
         var mouseRelX = (clientX - rect.left) - сɑ๗;
-        var mouseRelY = (clientY - rect.top)  - α︁ܝ;
-
+        var mouseRelY = (clientY - rect.top) - α︁ܝ;
         var rawX = World.PLAYER[x] + mouseRelX / scaleby;
         var rawY = World.PLAYER[y] + mouseRelY / scaleby;
-
         return {
             realX: Math.floor(rawX / 100),
             realY: Math.floor(rawY / 100)
         };
     }
 
-    var _tpHud = document.createElement("div");
-    _tpHud.style.cssText = [
+    function _getPlayerCoords() {
+        var rawX = World.PLAYER[x];
+        var rawY = World.PLAYER[y];
+        return {
+            realX: Math.floor(rawX / 100),
+            realY: Math.floor(rawY / 100)
+        };
+    }
+
+    var _playerHud = document.createElement("div");
+    _playerHud.style.cssText = [
         "position:fixed",
-        "top:8px",
-        "left:8px",
+        "top:10px",
+        "left:10px",
         "color:#ffffff",
+        "font-family:monospace",
+        "font-size:16px",
+        "font-weight:700",
+        "pointer-events:none",
+        "z-index:99999"
+    ].join(";");
+    document.body.appendChild(_playerHud);
+
+    var _mouseHud = document.createElement("div");
+    _mouseHud.style.cssText = [
+        "position:fixed",
+        "color:#ffff00",
         "font-family:monospace",
         "font-size:13px",
         "font-weight:700",
         "pointer-events:none",
         "z-index:99999",
-        "display:none"
+        "display:none",
+        "background:rgba(0,0,0,0.5)",
+        "padding:2px 6px",
+        "border-radius:3px"
     ].join(";");
-    document.body.appendChild(_tpHud);
+    document.body.appendChild(_mouseHud);
+
+    var _notifHud = document.createElement("div");
+    _notifHud.style.cssText = [
+        "position:fixed",
+        "top:12px",
+        "left:50%",
+        "transform:translateX(-50%)",
+        "color:#ffffff",
+        "font-family:monospace",
+        "font-size:18px",
+        "font-weight:700",
+        "pointer-events:none",
+        "z-index:99999",
+        "display:none",
+        "background:rgba(0,0,0,0.6)",
+        "padding:6px 18px",
+        "border-radius:6px"
+    ].join(";");
+    document.body.appendChild(_notifHud);
+
+    var _notifTimeout = null;
+    function _showNotif(text) {
+        _notifHud.textContent = text;
+        _notifHud.style.display = "block";
+        if (_notifTimeout) clearTimeout(_notifTimeout);
+        _notifTimeout = setTimeout(function() {
+            _notifHud.style.display = "none";
+        }, 1500);
+    }
+
+    setInterval(function() {
+        try {
+            if (!World || !World.PLAYER) return;
+            var p = _getPlayerCoords();
+            _playerHud.textContent = p.realX + ":" + p.realY;
+        } catch(e) {}
+    }, 100);
 
     window.addEventListener("mousemove", function(e) {
         _tpClientX = e.clientX;
         _tpClientY = e.clientY;
+        if (!teleportEnabled) {
+            _mouseHud.style.display = "none";
+            return;
+        }
         try {
-            if (!World || !World.PLAYER) { _tpHud.style.display = "none"; return; }
+            if (!World || !World.PLAYER) return;
             var c = _tpGetWorldCoords(e.clientX, e.clientY);
-            _tpHud.style.display = "block";
-            _tpHud.textContent = c.realX + ":" + c.realY;
-        } catch(e) { _tpHud.style.display = "none"; }
+            _mouseHud.style.display = "block";
+            _mouseHud.style.left = (e.clientX + 12) + "px";
+            _mouseHud.style.top = (e.clientY - 20) + "px";
+            _mouseHud.textContent = c.realX + ":" + c.realY;
+        } catch(e) {}
     }, false);
 
     document.addEventListener("contextmenu", function(e) {
+        if (!teleportEnabled) return;
         try {
             if (!World || !World.PLAYER) return;
             if (document.activeElement && document.activeElement.id === "chatInput") return;
@@ -24532,6 +24594,16 @@
             e.preventDefault();
             e.stopPropagation();
         } catch(err) {}
+    }, true);
+
+    window.addEventListener("keydown", function(e) {
+        if (e.code === "Backquote") {
+            teleportEnabled = !teleportEnabled;
+            if (!teleportEnabled) {
+                _mouseHud.style.display = "none";
+            }
+            _showNotif("Teleport " + (teleportEnabled ? "ON" : "OFF"));
+        }
     }, true);
 })();
 
